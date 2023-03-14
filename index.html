@@ -1,1 +1,226 @@
-"The site is currently under maintenance - Jainik Mehta" 
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Personal Portfolio website - Jainik Mehta</title>
+        <link rel="stylesheet" href="style.css">
+        <script src="https://kit.fontawesome.com/c206c76251.js" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <div id ="header">
+            <div class="container">
+                <nav>
+                    <img src="logo.png" class="logo">
+                    <ul id = "sidemenu">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Services</a></li>
+                        <li><a href="#">Portfolio</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <i class="fas fa-times" onclick="closemenu()"></i>
+                    </ul>
+                    <i class="fas fa-bars" onclick="openmenu()"></i>
+                </nav>
+                <div class="header-text">
+                    <p>Mechanical Engineer</p>
+                    <h1>Hi, I'm <span>Jainik</span><br>from Israel</h1>            
+                </div>
+            </div>
+        </div>
+
+        <!--------------------------------about me section-------------------------------------------->
+
+        <div id="about">
+            <div class="container">
+                <div class="row">
+                    
+                    <div class="about-col-1">
+                            <img src="user.png">
+                    </div>
+
+                    <div class="about-col-2">
+                        <h1 class="sub-title">About Me</h1>
+                        <p>djfkdfj ksjfk djfksdjf kdsjf dfsfs</p>
+                        
+                        <div class="tab-titles">
+                            <p class="tab-links active-link" onclick="opentab('skills')">Skills</p>
+                            <p class="tab-links" onclick="opentab('experience')">Experience</p>
+                            <p class="tab-links" onclick="opentab('education')">Education</p>
+                        </div>
+                        
+                        <div class="tab-contents active-tab" id="skills">
+                            <ul>
+                                <li><span>UI/UX</span><br>Desingning Web/App interfaces</li>
+                                <li><span>UI/UX</span><br>Web app development</li>
+                                <li><span>UI/UX</span><br>Building android</li>
+                                
+                            </ul>
+                        </div>   
+                        
+                        <div class="tab-contents" id="experience">
+                            <ul>
+                                <li><span>UI/UX</span><br>experience/App interfaces</li>
+                                <li><span>UI/UX</span><br>experience development</li>
+                                <li><span>UI/UX</span><br>experience android</li>
+                                
+                            </ul>
+                        </div>   
+                        
+                        <div class="tab-contents" id="education">
+                            <ul>
+                                <li><span>UI/UX</span><br>education Web/App interfaces</li>
+                                <li><span>UI/UX</span><br>Web app development</li>
+                                <li><span>UI/UX</span><br>Building android</li>    
+                            </ul>
+                        </div>   
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <!--------------------------------services section-------------------------------------------->
+        <div id="services">
+            <div class="container">
+                <h1 class="sub-title">My Services</h1>
+                <div class="services-list">
+
+                    <div>
+                        <i class="fa-solid fa-code"></i>
+                        <h2>Web designer</h2>
+                        <p>sdfa sdf asdf </p>
+                        <a href = "#"> Learn more </a>
+                    </div>
+
+                    <div>
+                        <i class="fa-solid fa-crop"></i>
+                        <h2>Web designer</h2>
+                        <p>sdfa sdf asdf dsfaadsf sdfs sdf asdf asdfsdf asdfa
+                            aadsf asdfsdf asdfadsf asdfsf  </p>
+                        <a href = "#"> Learn more </a>
+                    </div>
+
+                    <div>
+                        <i class="fa-brands fa-apple"></i>
+                        <h2>Web designer</h2>
+                        <p>sdfa sdf asdf </p>
+                        <a href = "#"> Learn more </a>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    <!--------------------------------portfolio section-------------------------------------------->
+        <div id="portfolio">
+            <div class="container">
+                <h1 class="sub-title">My Work</h1>
+                
+                <div class="work-list">
+
+                    <div class="work">
+                        <img src="work-1.png">
+                            
+                        <div class="layer">
+                            <h3>Social media app</h3>
+                            <p>The app connects you to the talend people around the word. Down</p>
+                            <a href="#"><i class="fa-solid fa-link"></i></a>
+                        </div>
+                    </div> 
+
+                    <div class="work">
+                        <img src="work-2.png">
+                        <div class="layer">
+                            <h3>Social media app</h3>
+                            <p>The app connects you to the talend people around the word. Down</p>
+                            <a href="#"><i class="fa-solid fa-link"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="work">
+                        <img src="work-3.png">
+                        <div class="layer">
+                            <h3>Social media app</h3>
+                            <p>The app connects you to the talend people around the word. Down</p>
+                            <a href="#"><i class="fa-solid fa-link"></i></a>
+                        </div>
+                    </div>
+
+                </div>
+                <a href="#" class="btn">See more</a>
+            </div>
+
+        </div>
+
+
+    <!--------------------------------contact section-------------------------------------------->
+
+    <div id="contact">
+        <div class="container">
+            <div class="row">
+                <div class="contact-left">
+                    <h1 class="sub-title">Contact Me</h1>
+                    <p><i class="fa-sharp fa-solid fa-paper-plane"></i>jainikjmehta@gmail.com</p>
+                    <p><i class="fa-solid fa-phone"></i>1234567890</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                        <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+                    </div>
+                    <a href="my-cv.pdf" download class="btn btn2">Download CV</a>
+                </div>
+
+                <div class="contact-right">
+                    <form>
+                        <input type="text" class="input-box" placeholder="Your name" required>
+                        <input type="email" class="input-box" placeholder="Your email" required>
+                        <textarea rows="4" class="input-box" placeholder="Your message"></textarea>
+                        <button type="submit" class="btn2">Send</button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+
+        <div>
+            <div class="copyright">
+                <p>Copyright © Jainik Mehta /2023</p>
+            </div>
+        </div>
+    </div>
+
+    <!--------------------------------script section-------------------------------------------->
+        <script>
+            var tablinks = document.getElementsByClassName("tab-links");
+            var tabcontents = document.getElementsByClassName("tab-contents");
+
+            function opentab(tabname){
+                for(var i=0; i<tablinks.length; i++){
+                    tablinks[i].classList.remove("active-link");
+                }
+                for(var i=0; i<tabcontents.length; i++){
+                    tabcontents[i].classList.remove("active-tab");
+                }
+                document.getElementById(tabname).classList.add("active-tab");
+                event.currentTarget.classList.add("active-link");
+            }
+
+        </script>
+
+        <script>
+            var sidemenu = document.getElementById("sidemenu");
+
+            function openmenu(){
+                sidemenu.style.right = "0px";
+            }
+            function closemenu(){
+                sidemenu.style.right = "-200px";
+            }
+            
+        </script>
+
+    </body>
+
+</html>
