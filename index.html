@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="style.css">
+        <title>Jainik Mehta</title>
+        <script src="https://kit.fontawesome.com/c0f922a5e8.js" crossorigin="anonymous"></script>
+    </head>
+
+    <body>
+
+
+    <!--------------------------------Header and Navigation section-------------------------------------------->
+        <div id="Header">
+            <div class="container">
+                <nav class="navigation">
+                    <img src="Images/JM_2.png" class="logo">
+                    <ul id="sidemenu">
+                        <li><a href="#Header" class="nav-link">Home</a></li>
+                        <li><a href="#about" class="nav-link">About</a></li>
+                        <li><a href="#services" class="nav-link">Expertise</a></li>
+                        <li><a href="#portfolio" class="nav-link">Portfolio</a></li>
+                        <li><a href="#contact" class="nav-link">Contact</a></li>
+                        <i class="fas fa-times" onclick="closemenu()"></i>
+                    </ul>
+                    <i class="fas fa-bars" onclick="openmenu()"></i>
+                </nav>
+            </div>
+        </div>
+
+        <div class="header-text-image">
+            <div class="header-text">
+                    <h1>Hi, I'm <span id="Jainik">Jainik</span><br>from <span id="Israel">India</span></h1>                    
+            </div>
+            <div class="header-image">
+                <img src="Images/profile_pic.png" alt="user">
+            </div>
+        </div>
+
+        <div class="video-container" id="video-container">
+        <video id="myVideo" src="Images/Robot_video.mp4" muted autoplay loop>
+            Your browser does not support the video tag.
+          </video>
+        </div>
+        
+    <!--------------------------------About me section-------------------------------------------->
+    <div id="about">
+        <div class="about_me_container">
+            <div class="row">
+                
+                <div class="about-col-1">
+                        <img src="Images/Jainik_cover_cropped.jpg">
+                </div>
+
+                <div class="about-col-2">
+                    <h1 class="sub-title"><span id = "About">About </span><span id = "Me">Me</span></h1>
+                    <p id="About_me_para">Mechanical engineering student (robotics major) with 2 years of experience in 3-d modelling and printing, CNC machining, linear and non-linear control systems,
+                        electric actuators, and engineering simulation. Actively involved in fields of heat
+                        transfer, fluid mechanics, rocket propulsion technologies, and defense robotics.</p>
+                    
+                    <div class="tab-titles">
+                        <p class="tab-links active-link" onclick="opentab('skills')">Skills</p>
+                        <p class="tab-links" onclick="opentab('experience')">Experience</p>
+                        <p class="tab-links" onclick="opentab('education')">Education</p>
+                    </div>
+                    
+                    <div class="tab-contents active-tab" id="skills">
+                        <ul>
+                            <li><span>SolidWorks/Creo : High proficiency</span><br>Desingning 3d assemblies</li>
+                            <li><span>Python : Intermediate proficiency</span><br>Machine learning</li>
+                            <li><span>C/C++ : High proficiency</span><br>Building desktop applications using .NET</li>
+                            <li><span>HTML/CSS/JavaScript : Intermediate proficiency</span><br>Building websites</li>
+                            <li><span>ROS framework : Beginner proficiency</span><br>Simulating robot and doing Mapping, Localization and Navigation using ROS framework.</li>
+                            
+                            
+                        </ul>
+                    </div>   
+                    
+                    <div class="tab-contents" id="experience">
+                        <ul>
+                            <li><span>Student Researcher : Technion - IIT</span><br>Building experimental setups</li>
+                            <li><span>Structral Engineer : Technion -IIT</span><br> Technion Rocketry Club</li>
+                            <li><span>Founder : Former</span><br>elvister.com</li>
+                            
+                        </ul>
+                    </div>   
+                    
+                    <div class="tab-contents" id="education">
+                        <ul>
+                            <li><span>Bachelor Degree in Mechanical Engineering : GPA - 85/100</span><br>Technion - Israel Institute of Technology, Haifa, Israel</li>
+                            <li><span>High School</span><br>Bhavans Vidya Mandir, Nagpur, India</li>
+                            <li><span>Schooling</span><br>Swaminarayan School, Nagpur, India</li>    
+                        </ul>
+                    </div>   
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--------------------------------services section-------------------------------------------->
+    <div id="services">
+        <div id="my_services_container">
+            <h1 class="sub-title"><span id="My">My</span><span id="Services"> Expertise</span> </h1>
+            <div class="services-list">
+
+                <div>
+                    <i class="fa-solid fa-code"></i>
+                    <h2>Software/App Designing</h2>
+                    <p id ="SmallText">Familar with designing and building software using MATLAB app designer, Win32 API and Microsoft .NET framework. </p>
+                    <a href = "https://github.com/FalconSupernova/GameB"> Current Ongoing Project </a>
+                </div>
+
+                <div>
+                    <i class="fa-sharp fa-solid fa-compass-drafting"></i>
+                    <h2>Simulation/3d Modelling</h2>
+                    <p id ="SmallText">Familar with Creo parametric and SolidWorks along with Ansys workbench.</p>
+                    <a href = "https://drive.google.com/drive/folders/1CiqtPL9G3KAO8V_9r2_O8KH2fEA7R2ry?usp=sharing"> Few Examples </a>
+                </div>
+
+                <div>
+                    <i class="fa-solid fa-crop"></i>
+                    <h2>Web Apps Designing</h2>
+                    <p id ="SmallText">Familar with designing both backend and frontend websites using CSS, JavaScript, HTML and PhP</p>
+                    <a href = "https://github.com/FalconSupernova/3N-1-Collatz-Conjecture"> Other Projects </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+<!--------------------------------portfolio section-------------------------------------------->
+<div id="portfolio">
+    <div id="portfolio_container">
+        <h1 class="sub-title"><span id="My">My</span> <span id="Services">Work</span></h1>
+        
+        <div class="work-list">
+
+            <div class="work">
+                <img src="Images/work-1.png">
+                    
+                <div class="layer">
+                    <h3>Nuclear Thermal Rocket Simulator</h3>
+                    <p id = "bigText">The purpose of this project is to construct a digital model of nuclear thermal propulsion
+                        rocket engine using numerical tools incorporating fundamental equations to determine whether we can optimize
+                        certain components and processes within NP rocket engine that will provide us with
+                        maximum efficiency in terms launching cost and also in terms of distance it can
+                        travel per kilogram of propellant(i.e., specific impulse).</p>
+                    <a href="https://drive.google.com/drive/folders/1vI-5F4fRaFPQP9XRAI8roJY12xX34-cT?usp=sharing"><i class="fa-solid fa-link"></i></a>
+                </div>
+            </div> 
+
+            <div class="work">
+                <img src="Images/work-2.png">
+                <div class="layer">
+                    <h3>Automatic potato peeling machine</h3>
+                    <p id = "bigText"> This machine helps you peel potato in less than 10 seconds. The potato is mounted by pins on a
+                        motor-powered stage which rotates about the vertical axis. An arm is attached to a vertical
+                        power screw using a torsion spring. A knife is attached at the tip of the arm. As the power
+                        screw moves from top to bottom, the knife is pressed firmly against the surface of the potato
+                        by the torsion spring and removes its skin.</p>
+                    <a href="https://drive.google.com/drive/folders/103jwyOrFtLENZBJmR8wtcvwC5SnD1E4e?usp=sharing"><i class="fa-solid fa-link"></i></a>
+                </div>
+            </div>
+
+            <div class="work">
+                <img src="Images/work-3.png">
+                <div class="layer">
+                    <h3>Alligator egg harvesting robot</h3>
+                    <p id = "bigText"> The robot aims to harvest alligator eggs in the 10-30cm proximity of alligator nests. The robot will, 
+                        be controlled remotely by a human operator, and it can withstand operational conditions in a 
+                        lake and marsh alligator farm area, harvest eggs without provoking the alligator, and 
+                        comply with other quantitative technical requirements set by the client.</p>
+                    <a href="https://drive.google.com/drive/folders/1tVDSuRZRqGKfyEIdWkdGxNyRHK56R_Y1?usp=sharing"><i class="fa-solid fa-link"></i></a>
+                </div>
+            </div>
+
+        </div>
+        <a href="https://drive.google.com/drive/folders/1CiqtPL9G3KAO8V_9r2_O8KH2fEA7R2ry?usp=sharing" class="btn">See more</a>
+    </div>
+
+</div>
+
+<!--------------------------------contact section-------------------------------------------->
+
+<div id="contact">
+    <div id="portfolio_container">
+        <div class="row">
+            <div class="contact-left">
+                <h1 class="sub-title"><span id="My">Contact</span> <span id="Services">Me</span></h1>
+                <p class="email-text"><i class="fa-sharp fa-solid fa-paper-plane"></i>jainikjmehta@gmail.com</p>
+                <p class="email-text"><i class="fa-solid fa-phone"></i>(+972)584060701</p>
+                <div class="social-icons">
+                    <a href="https://www.facebook.com/jainik.mehta.71"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="https://twitter.com/_jainik_"><i class="fa-brands fa-twitter"></i></a>
+                    <a href="https://www.instagram.com/jainik_mehta/"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://www.linkedin.com/in/jainik-m/"><i class="fa-brands fa-linkedin-in"></i></a>
+                </div>
+                <a href="Images/Jainik_CV.pdf" download class="btn btn2">Download CV</a>
+            </div>
+
+            <div class="contact-right">
+                <form name="submit-to-google-sheet">
+                    <input type="text" name = "Name" class="input-box" placeholder="Your name" required>
+                    <input type="email" name = "Email" class="input-box" placeholder="Your email" required>
+                    <textarea rows="4" name="Message" class="input-box" placeholder="Your message"></textarea>
+                    <button type="submit" class="btn2">Send</button>
+                </form>
+                <span id="success_message"></span>
+            </div>
+
+        </div>
+    </div>
+
+    <div>
+        <div class="copyright">
+            <p>Copyright © Jainik Mehta / 2023</p>
+        </div>
+    </div>
+</div>
+
+
+    <!--------------------------------Navigation script section-------------------------------------------->
+        <script>
+            var sidemenu = document.getElementById("sidemenu");
+
+            function openmenu(){
+                sidemenu.style.right = "0px";
+            }
+            function closemenu(){
+                sidemenu.style.right = "-200px";
+            }
+            
+        </script>
+
+    <!--------------------------------About me script section-------------------------------------------->
+        <script>
+            var tablinks = document.getElementsByClassName("tab-links");
+            var tabcontents = document.getElementsByClassName("tab-contents");
+
+            function opentab(tabname){
+                for(var i=0; i<tablinks.length; i++){
+                    tablinks[i].classList.remove("active-link");
+                }
+                for(var i=0; i<tabcontents.length; i++){
+                    tabcontents[i].classList.remove("active-tab");
+                }
+                document.getElementById(tabname).classList.add("active-tab");
+                event.currentTarget.classList.add("active-link");
+            }
+        </script>
+
+    <!--------------------------------Contact form script section-------------------------------------------->
+        <script>
+            const scriptURL = 'https://script.google.com/macros/s/AKfycbw0DFB3kf8nKbPf_Y0P8hjqg3c1e_37Xp4yIl_BAx5EkM3UvrQzIBvXs79lFkHA3fr7rQ/exec'
+            const form = document.forms['submit-to-google-sheet']
+            const success_message = document.getElementById('success_message')
+        
+            form.addEventListener('submit', e => {
+            e.preventDefault()
+            fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+                .then(response => {
+                    success_message.innerHTML = "Thanks for contacting me! I will get back to you soon."
+                    setTimeout(function(){success_message.innerHTML = "";}, 5000);
+                    form.reset()
+                    console.log('Success!', response)
+                })
+                .catch(error => console.error('Error!', error.message))
+            })
+        </script>
+
+
+<script>
+    // Function to handle smooth scrolling
+    function smoothScroll(targetId) {
+      const target = document.querySelector(targetId);
+      if (target) {
+        window.scrollTo({
+          top: target.offsetTop,
+          behavior: "smooth"
+        });
+      }
+    }
+  
+    // Add click event listeners to navigation links
+    const navLinks = document.querySelectorAll(".nav-link");
+  
+    navLinks.forEach((link) => {
+      link.addEventListener("click", function (e) {
+        e.preventDefault();
+  
+        // Remove 'active' class from all links
+        navLinks.forEach((navLink) => {
+          navLink.classList.remove("active");
+        });
+  
+        // Add 'active' class to the clicked link
+        this.classList.add("active");
+  
+        const targetId = this.getAttribute("href");
+        smoothScroll(targetId);
+      });
+    });
+  </script>
+  
+  
+    </body>
+
+
+</html>
