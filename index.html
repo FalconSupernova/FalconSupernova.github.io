@@ -9,7 +9,6 @@
         <link rel="stylesheet" href="style.css">
         <title>Jainik Mehta</title>
         <script src="https://kit.fontawesome.com/c0f922a5e8.js" crossorigin="anonymous"></script>
-        <script type="module" src="https://unpkg.com/@splinetool/viewer@0.9.455/build/spline-viewer.js"></script>
     </head>
 
     <body>
@@ -17,14 +16,14 @@
     <!--------------------------------Header and Navigation section-------------------------------------------->
         <div id="Header">
             <div class="container">
-                <nav>
+                <nav class="navigation">
                     <img src="Images/JM_2.png" class="logo">
                     <ul id="sidemenu">
-                        <li><a href="#Header">Home</a></li>
-                        <li><a href="#about">About</a></li>
-                        <li><a href="#services">Services</a></li>
-                        <li><a href="#portfolio">Portfolio</a></li>
-                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="#Header" class="nav-link">Home</a></li>
+                        <li><a href="#about" class="nav-link">About</a></li>
+                        <li><a href="#services" class="nav-link">Expertise</a></li>
+                        <li><a href="#portfolio" class="nav-link">Portfolio</a></li>
+                        <li><a href="#contact" class="nav-link">Contact</a></li>
                         <i class="fas fa-times" onclick="closemenu()"></i>
                     </ul>
                     <i class="fas fa-bars" onclick="openmenu()"></i>
@@ -34,14 +33,17 @@
 
         <div class="header-text-image">
             <div class="header-text">
-                    <h1>Hi, I'm <span id="Jainik">Jainik</span><br>from <span id="Israel">Israel</span></h1>           
+                    <h1>Hi, I'm <span id="Jainik">Jainik</span><br>from <span id="Israel">India</span></h1>           
             </div>
             <div class="header-image">
                 <img src="Images/profile_pic.png" alt="user">
             </div>
         </div>
-        <div id="spline-container">
-            <spline-viewer url="https://prod.spline.design/uAlGvrIEk0s9qeK8/scene.splinecode"></spline-viewer>
+
+        <div class="video-container" id="video-container">
+        <video id="myVideo" src="Images/Robot_video.mp4" muted autoplay loop>
+            Your browser does not support the video tag.
+          </video>
         </div>
         
     <!--------------------------------About me section-------------------------------------------->
@@ -102,7 +104,7 @@
     <!--------------------------------services section-------------------------------------------->
     <div id="services">
         <div id="my_services_container">
-            <h1 class="sub-title"><span id="My">My</span><span id="Expertise"> Services</span> </h1>
+            <h1 class="sub-title"><span id="My">My</span><span id="Services"> Expertise</span> </h1>
             <div class="services-list">
 
                 <div>
@@ -187,9 +189,9 @@
     <div id="portfolio_container">
         <div class="row">
             <div class="contact-left">
-                <h1 class="sub-title">Contact Me</h1>
-                <p><i class="fa-sharp fa-solid fa-paper-plane"></i>jainikjmehta@gmail.com</p>
-                <p><i class="fa-solid fa-phone"></i>(+972)584060701</p>
+                <h1 class="sub-title"><span id="My">Contact</span> <span id="Services">Me</span></h1>
+                <p class="email-text"><i class="fa-sharp fa-solid fa-paper-plane"></i>jainikjmehta@gmail.com</p>
+                <p class="email-text"><i class="fa-solid fa-phone"></i>(+972)584060701</p>
                 <div class="social-icons">
                     <a href="https://www.facebook.com/jainik.mehta.71"><i class="fa-brands fa-facebook-f"></i></a>
                     <a href="https://twitter.com/_jainik_"><i class="fa-brands fa-twitter"></i></a>
@@ -268,7 +270,42 @@
                 .catch(error => console.error('Error!', error.message))
             })
         </script>
-        
+
+
+<script>
+    // Function to handle smooth scrolling
+    function smoothScroll(targetId) {
+      const target = document.querySelector(targetId);
+      if (target) {
+        window.scrollTo({
+          top: target.offsetTop,
+          behavior: "smooth"
+        });
+      }
+    }
+  
+    // Add click event listeners to navigation links
+    const navLinks = document.querySelectorAll(".nav-link");
+  
+    navLinks.forEach((link) => {
+      link.addEventListener("click", function (e) {
+        e.preventDefault();
+  
+        // Remove 'active' class from all links
+        navLinks.forEach((navLink) => {
+          navLink.classList.remove("active");
+        });
+  
+        // Add 'active' class to the clicked link
+        this.classList.add("active");
+  
+        const targetId = this.getAttribute("href");
+        smoothScroll(targetId);
+      });
+    });
+  </script>
+  
+  
     </body>
 
 
