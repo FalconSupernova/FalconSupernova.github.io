@@ -1,0 +1,687 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Multi-Agent area coverage with dynamic and static obstacle avoidance.</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-transparentGray { background-color: rgba(227, 226, 224, 0); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="03779511-a984-40e8-94ce-5a78d2eb6639" class="page sans"><header><h1 class="page-title">Multi-Agent area coverage with dynamic and static obstacle avoidance.</h1><p class="page-description"></p></header><div class="page-body"><p id="de622ab0-ab54-464a-81c9-28a8467845df" class="">
+</p><figure id="9fb3110c-c391-4f0c-88d9-cc1a9e807114" class="image"><a href="Multi-Agent%20area%20coverage%20with%20dynamic%20and%20static%20%2003779511a98440e894ce5a78d2eb6639/Density_map.drawio.png"><img style="width:723px" src="Multi-Agent%20area%20coverage%20with%20dynamic%20and%20static%20%2003779511a98440e894ce5a78d2eb6639/Density_map.drawio.png"/></a></figure><p id="77a15bc1-c87d-4786-a868-f6fc68711da6" class="">
+</p><p id="be6f76ae-586a-4a12-8cdd-f33f9d65a9df" class="">We use node based search to generate the reference trajectory and MPC to follow that reference trajectory. In the case of the dynamic obstacles the MPC will replan the trajectory while staying close to the reference trajectory. Therefore the error will be minimized since the reference trajectory is the optimal trajectory.</p><figure id="f4e0cdae-f95a-47b0-85e0-6ffa39866536" class="image"><a href="Multi-Agent%20area%20coverage%20with%20dynamic%20and%20static%20%2003779511a98440e894ce5a78d2eb6639/1.png"><img style="width:724px" src="Multi-Agent%20area%20coverage%20with%20dynamic%20and%20static%20%2003779511a98440e894ce5a78d2eb6639/1.png"/></a></figure><p id="e877b911-e321-46f5-b087-c4f44f9cd65c" class="">
+</p><figure id="d446578a-0ecb-48d0-9f4e-7d03a98a924f" class="image"><a href="Multi-Agent%20area%20coverage%20with%20dynamic%20and%20static%20%2003779511a98440e894ce5a78d2eb6639/Untitled.png"><img style="width:2976px" src="Multi-Agent%20area%20coverage%20with%20dynamic%20and%20static%20%2003779511a98440e894ce5a78d2eb6639/Untitled.png"/></a></figure><p id="0a1ecaa4-82e2-4aaa-b9b7-96c32db53617" class="">
+</p><p id="9f30863d-cd95-43be-9591-1fcbed9cc564" class="">
+</p><p id="da09f731-46d6-4206-9edd-956253ff6455" class="">
+</p><h1 id="7fd1e09a-402c-498c-b032-7266048bb1ec" class="">State Space - Observation of UAV</h1><ul id="5649dd7a-c164-4d01-954f-0554df9ec8cc" class="bulleted-list"><li style="list-style-type:disc">Position of UAV, Heading and Current cell level - (0,1,1,0) - 4 column vector<ul id="cded35de-dac5-4087-8c89-71ece808467c" class="bulleted-list"><li style="list-style-type:circle">Will not work for multiagent case. Can work if we allow partitioning of map.</li></ul><ul id="160a9f97-42d4-490d-afad-17855ddb7dff" class="bulleted-list"><li style="list-style-type:circle">Will not work for dynamic obstacle</li></ul><ul id="87348f0c-b736-4312-a209-ac4792eba2bc" class="bulleted-list"><li style="list-style-type:circle">Fast algorithm, with guaranteed convergence using Q learning approach.</li></ul><ul id="77b24936-69dd-4457-abe4-629db942ddbd" class="bulleted-list"><li style="list-style-type:circle">Not extensible to different matrix. Need to update the Q learning table every time. Chance of getting stuck local minima. </li></ul></li></ul><ul id="2ac3fe70-3eaf-48d7-aca2-8069ee05c304" class="bulleted-list"><li style="list-style-type:disc">Position of UAV, Heading, Current cell level plus cell level for adjacent cell - (0,1,1,0,0,0,0,1) - 8 column vector<ul id="71a42399-8d9a-4edc-b780-68a7f63b779e" class="bulleted-list"><li style="list-style-type:circle">Q Learning still possible however the algorithm will take long time to converge</li></ul></li></ul><ul id="07e410c1-e42e-4d29-ac24-5fe83ac70c6a" class="bulleted-list"><li style="list-style-type:disc">Position of UAV, Heading, Entire matrix cell level plus the location of all other UAV’s.</li></ul><p id="cb19e9ad-2411-4c20-9306-a1704335f6c8" class="">
+</p><h1 id="32c083b0-6c92-4bc9-a99c-669c990f55c1" class="">Initial condition</h1><ul id="3f1ecb45-a0a4-4101-ab31-3608dcbf51a9" class="bulleted-list"><li style="list-style-type:disc">The agent always starts from the same initial position and heading? - not true while training DQN agent.</li></ul><ul id="8cd0ed46-3846-47a0-ac16-64fca43c2de4" class="bulleted-list"><li style="list-style-type:disc">The entire matrix is known. We also the know position of static obstacles.   </li></ul><h1 id="c71fd6f9-9dce-4a22-aa42-5a69be19b724" class="">Algorithm that exists</h1><ul id="c3320a0e-3d94-4606-a58a-65416903d7cb" class="bulleted-list"><li style="list-style-type:disc">Depth first search<ul id="d6ce40ce-cdaf-4432-8e34-78688dacd980" class="bulleted-list"><li style="list-style-type:circle">The depth first search will work by </li></ul></li></ul><ul id="18afff34-df96-4ba4-80b0-f75f80feaa57" class="bulleted-list"><li style="list-style-type:disc">Minimum spanning tree</li></ul><ul id="ba6a7cd7-c235-4e80-99f0-8b53ba929eac" class="bulleted-list"><li style="list-style-type:disc">Ant colony optimization</li></ul><ul id="f14f87d6-34f5-4f91-9038-d578bab98de3" class="bulleted-list"><li style="list-style-type:disc">Dynamic programming</li></ul><ul id="d14db56d-636c-49a9-acdf-84f57b6fa39e" class="bulleted-list"><li style="list-style-type:disc">Q learning<ul id="2e19d4e3-12c6-4620-bc73-616913f5142a" class="bulleted-list"><li style="list-style-type:circle">How to limit action space with certain states in Q learning?<ul id="1716ee02-a79f-4217-ab6d-d433e384fc8c" class="bulleted-list"><li style="list-style-type:square">(0,1) will be north</li></ul><ul id="a18ee7d7-9b36-4922-89a2-d6012fb01640" class="bulleted-list"><li style="list-style-type:square">(0,-1) will be south</li></ul><ul id="6984110a-824f-4e09-b45e-eaeb897bd173" class="bulleted-list"><li style="list-style-type:square">(1,0) will be east</li></ul><ul id="5881e529-416a-4046-a779-20d049f4d107" class="bulleted-list"><li style="list-style-type:square">(-1,0) will be west</li></ul><ul id="c351e24a-16c4-4b01-9360-0771925baab1" class="bulleted-list"><li style="list-style-type:square">If any action results agent’s new state in non-valid region than the neural network should be asked again for different action.</li></ul></li></ul></li></ul><p id="ad3c38d7-9c73-4ec0-a6bc-5396b7866ef1" class="">
+</p><h1 id="cd159511-e730-42c6-907f-74df9b43cfa4" class="">Keywords</h1><p id="4b08cfab-e835-43f9-bcd3-1046d0c376a2" class=""><strong>Non-stationarity of the environment:</strong> An action performed by certain agent yield different rewards depending on the actions taken by the other agents.</p><p id="41c33d91-2d45-4abc-868d-aae44cbb2fa0" class=""><strong>Markov game:</strong>  When more than one agent is involved, an MDP is no longer suitable for describing the environment, given that actions from other agents are strongly tied to the state dynamics</p><p id="f5e989dd-b171-4540-a3dd-c32d8ee8294c" class="">
+</p><p id="23f050e4-4e08-452b-b50b-27d2f22c99af" class="">
+</p><h1 id="2681dc03-4e08-4982-bd8f-fc5a15a85812" class="">Model based RL examples:</h1><p id="7703b334-3785-4677-943a-f42838636632" class="">Some examples of model-based Reinforcement Learning (RL) algorithms include:</p><ol type="1" id="cf3871a2-785a-4afd-85f2-1a5e7edb77a2" class="numbered-list" start="1"><li><strong>Monte Carlo Tree Search (MCTS)</strong>: This algorithm involves building a tree of possible actions and outcomes to make decisions based on simulations of future states and rewards[4].</li></ol><ol type="1" id="1747bf13-d73a-4471-b8bf-43c9a9a57a1d" class="numbered-list" start="2"><li><strong>Model Predictive Control</strong>: This model-based algorithm optimizes trajectories by taking one action at a time and recalculating the optimal trajectory after each action, reducing the number of optimization steps needed[4].</li></ol><ol type="1" id="6d674007-0c38-4adc-ab63-7e7fd4298d72" class="numbered-list" start="3"><li><strong>Model Predictive Learning</strong>: In this approach, the algorithm approximates probabilities of actions and simulates trajectories to inform the agent about optimal decisions in stochastic environments[4].</li></ol><p id="e056b738-1aed-4458-8f46-3bf384b8973f" class="">These model-based RL algorithms leverage models of the environment to simulate outcomes, plan ahead, and make informed decisions based on predictions of rewards associated with actions. By utilizing these algorithms, agents can learn efficiently, exploit prior knowledge, and make intelligent decisions in complex environments.</p><p id="1fdba1d7-ea22-4204-a73e-de8d2a73718e" class="">Citations:<br/>[1] <br/><a href="https://spinningup.openai.com/en/latest/spinningup/rl_intro2.html">https://spinningup.openai.com/en/latest/spinningup/rl_intro2.html</a><br/>[2] <br/><a href="https://cwkx.github.io/data/teaching/dl-and-rl/rl-lecture9.pdf">https://cwkx.github.io/data/teaching/dl-and-rl/rl-lecture9.pdf</a><br/>[3] <br/><a href="https://www.linkedin.com/advice/0/what-advantages-disadvantages-model-based-model-free-dxozf">https://www.linkedin.com/advice/0/what-advantages-disadvantages-model-based-model-free-dxozf</a><br/>[4] <br/><a href="https://www.baeldung.com/cs/ai-model-free-vs-model-based">https://www.baeldung.com/cs/ai-model-free-vs-model-based</a><br/>[5] <br/><a href="https://bdtechtalks.com/2022/06/13/model-free-and-model-based-rl/">https://bdtechtalks.com/2022/06/13/model-free-and-model-based-rl/</a></p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
